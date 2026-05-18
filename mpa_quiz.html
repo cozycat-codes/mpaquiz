@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Is Your Accounting System Built to Scale? | Master Plan Accounting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #FAF7F2;
+  --clay: #A46037;
+  --clay-dark: #8a5030;
+  --burgundy: #6B2737;
+  --green-yes: #1a7a42;
+  --red-no: #A46037;
+  --text-dark: #2C2420;
+  --text-mid: #5C4A3A;
+  --text-light: #8A7060;
+  --border: #E0D5C8;
+  --white: #ffffff;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.brand-bar {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.brand-bar .brand-name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+h1 { font-size: 24px; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; line-height: 1.3; }
+h2 { font-size: 20px; font-weight: 600; color: var(--text-dark); margin-bottom: 0.35rem; }
+.subtitle { font-size: 15px; color: var(--text-mid); margin-bottom: 1.25rem; line-height: 1.6; }
+.why-box { border-left: 3px solid var(--clay); padding-left: 1rem; margin-bottom: 1.25rem; background: var(--cream); border-radius: 0 6px 6px 0; padding: 0.85rem 1rem 0.85rem 1rem; }
+.why-box p { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+.finds-label { font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 0.75rem; }
+.what-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.5rem; }
+.what-item { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem 0.85rem; font-size: 13px; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+.what-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--clay); flex-shrink: 0; margin-top: 4px; }
+.start-btn { background: var(--clay); color: #fff; border: none; border-radius: 8px; padding: 0.8rem 1.5rem; font-size: 15px; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; width: 100%; letter-spacing: 0.02em; }
+.start-btn:hover { background: var(--clay-dark); }
+.progress-wrap { margin-bottom: 1.5rem; }
+.progress-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.progress-label { font-size: 12px; font-weight: 600; color: var(--clay); text-transform: uppercase; letter-spacing: 0.08em; }
+.progress-pct { font-size: 12px; color: var(--text-light); }
+.progress-track { height: 4px; background: var(--border); border-radius: 2px; }
+.progress-fill { height: 4px; background: var(--clay); border-radius: 2px; transition: width 0.3s ease; }
+.section-title { font-size: 20px; font-weight: 600; color: var(--text-dark); margin-bottom: 0.4rem; }
+.section-desc { font-size: 14px; color: var(--text-mid); margin-bottom: 1.5rem; line-height: 1.65; }
+.question-block { margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+.question-block:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.q-num { font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+.question-text { font-size: 15px; color: var(--text-dark); line-height: 1.6; margin-bottom: 0.75rem; }
+.options { display: flex; gap: 10px; }
+.opt-btn {
+  flex: 1;
+  padding: 0.65rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-mid);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.opt-btn:hover { border-color: var(--clay); color: var(--clay); }
+.opt-btn.selected-yes { background: var(--green-yes); border-color: var(--green-yes); color: #ffffff; }
+.opt-btn.selected-no { background: var(--clay); border-color: var(--clay); color: #ffffff; }
+.checkmark { font-size: 14px; }
+.nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; gap: 10px; }
+.nav-btn { padding: 0.6rem 1.25rem; border: 1px solid var(--border); border-radius: 8px; background: var(--white); font-size: 14px; font-weight: 500; font-family: 'Montserrat', sans-serif; color: var(--text-dark); cursor: pointer; }
+.nav-btn:hover { background: var(--cream); }
+.nav-btn.primary { background: var(--clay); color: #fff; border-color: var(--clay); }
+.nav-btn.primary:hover { background: var(--clay-dark); }
+.nav-btn:disabled { opacity: 0.35; cursor: default; }
+.step-dots { display: flex; gap: 6px; align-items: center; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+.dot.active { background: var(--clay); }
+.dot.done { background: var(--clay); opacity: 0.45; }
+.unanswered-note { font-size: 13px; color: var(--clay); margin-top: 0.75rem; display: none; font-weight: 500; }
+.score-header { text-align: center; background: var(--cream); border-radius: 10px; padding: 1.75rem; margin-bottom: 1.25rem; border: 1px solid var(--border); }
+.score-badge { font-size: 48px; font-weight: 600; color: var(--clay); display: block; margin: 0.35rem 0; line-height: 1; }
+.score-category { font-size: 17px; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+.score-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+.section-scores-label { font-size: 12px; font-weight: 600; color: var(--clay); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.65rem; }
+.section-score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1.25rem; }
+.section-score-item { background: var(--cream); border-radius: 8px; padding: 0.85rem; border: 1px solid var(--border); }
+.ss-label { font-size: 12px; color: var(--text-mid); margin-bottom: 6px; font-weight: 500; }
+.ss-bar-wrap { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 5px; }
+.ss-bar { height: 4px; border-radius: 2px; }
+.ss-val { font-size: 12px; color: var(--text-light); }
+.rec-label { font-size: 12px; font-weight: 600; color: var(--clay); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.65rem; }
+.rec-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1rem; margin-bottom: 0.5rem; font-size: 14px; color: var(--text-mid); line-height: 1.65; display: flex; gap: 10px; align-items: flex-start; }
+.rec-bullet { width: 6px; height: 6px; border-radius: 50%; background: var(--clay); flex-shrink: 0; margin-top: 6px; }
+.cta-card { background: var(--burgundy); border-radius: 12px; padding: 1.75rem; text-align: center; margin-top: 1.25rem; }
+.cta-card h3 { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
+.cta-card p { font-size: 14px; color: rgba(255,255,255,0.85); margin-bottom: 1.25rem; line-height: 1.65; }
+.cta-btn { display: inline-block; background: var(--cream); color: var(--burgundy); border-radius: 8px; padding: 0.8rem 1.75rem; font-size: 15px; font-weight: 600; font-family: 'Montserrat', sans-serif; text-decoration: none; cursor: pointer; border: none; letter-spacing: 0.02em; }
+.cta-btn:hover { background: #f0ece5; }
+.restart-row { text-align: center; margin-top: 1rem; }
+.restart-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem 1rem; font-size: 13px; font-family: 'Montserrat', sans-serif; color: var(--text-light); cursor: pointer; }
+.restart-btn:hover { border-color: var(--clay); color: var(--clay); }
+.hidden { display: none; }
+@media (max-width: 480px) {
+  .what-list { grid-template-columns: 1fr; }
+  .section-score-grid { grid-template-columns: 1fr; }
+  body { padding: 1rem 0.75rem; }
+  .card { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="brand-bar">
+    <span class="brand-name">Master Plan Accounting</span>
+  </div>
+
+  <div id="intro">
+    <div class="card">
+      <h1>Is your accounting system built to scale?</h1>
+      <p class="subtitle">A self-assessment for service and maintenance business owners doing $1M or more in annual revenue.</p>
+      <div class="why-box">
+        <p>Most business owners at your revenue level are making decisions based on incomplete or unreliable financial information. Not because they are not smart, but because their accounting system was set up for a smaller, simpler business and was never updated to match where they are today. This quiz will show you exactly where the gaps are.</p>
+      </div>
+      <p class="finds-label">In about 3 minutes you will find out:</p>
+      <div class="what-list">
+        <div class="what-item"><span class="dot"></span>Whether your books are structured correctly</div>
+        <div class="what-item"><span class="dot"></span>If your processes protect your business</div>
+        <div class="what-item"><span class="dot"></span>Whether you know your three key numbers</div>
+        <div class="what-item"><span class="dot"></span>If your system supports your long-term goals</div>
+      </div>
+      <button class="start-btn" onclick="startQuiz()">Start the assessment &rarr;</button>
+    </div>
+  </div>
+
+  <div id="quiz-body" class="hidden"></div>
+  <div id="results" class="hidden"></div>
+</div>
+
+<script>
+const sections = [
+  {
+    id: 'structure',
+    label: 'Section 1 of 4',
+    title: 'System structure',
+    desc: 'How your chart of accounts, COGS, and products and services list are set up determines whether your reports tell you anything useful. These questions reveal whether the foundation is solid.',
+    questions: [
+      'My chart of accounts was intentionally structured for my business by an accounting professional, not set up using QuickBooks default accounts.',
+      'My Cost of Goods Sold (COGS) section includes field labor, materials, subcontractors, and job-related equipment only.',
+      'My payroll is mapped so that field wages are separated from admin wages in my books.',
+      'My products and services list breaks out income by service type, not just broad categories like "Services" or "Income."',
+      'My accounting system is efficient enough that my books are finalized and accurate within a couple of weeks after month end.'
+    ]
+  },
+  {
+    id: 'processes',
+    label: 'Section 2 of 4',
+    title: 'Processes and controls',
+    desc: "A well-structured system means nothing if the month-end process is broken or payroll is running on one person's memory. These questions assess whether your operational controls are protecting your business.",
+    questions: [
+      'There is a formal written month-end close process with a specific deadline each month, tailored to my business.',
+      'Someone other than the bookkeeper reviews the financials each month for accuracy and irregularities.',
+      'Transaction coding is consistent, with similar expenses always going to the same account.',
+      'There is a written payroll checklist used for every payroll, and at least two people are trained to process payroll start to finish.',
+      'I have approval processes in place for bill pay, payroll changes, and company bank account access.'
+    ]
+  },
+  {
+    id: 'numbers',
+    label: 'Section 3 of 4',
+    title: 'Your key numbers',
+    desc: 'Three numbers tell the real story of a service business: gross margin, net profit, and overhead ratio. If you do not know all three off the top of your head, decisions are being made on guesswork.',
+    questions: [
+      'I know my business gross margin percentage off the top of my head right now.',
+      'I know my current net profit percentage and whether it falls within a healthy range for my industry.',
+      'I know my overhead ratio and whether my fixed costs are proportionate to my revenue.',
+      'I make major business decisions based on my financial reports, not my bank account balance.',
+      'I have a financial dashboard or report that tracks my key metrics and is updated at least monthly.'
+    ]
+  },
+  {
+    id: 'vision',
+    label: 'Section 4 of 4',
+    title: 'Vision and scalability',
+    desc: 'Whether your goal is to sell in ten years, pass the business on, or simply step back without everything falling apart, your accounting system either supports that future or quietly undermines it.',
+    questions: [
+      'My accounting system is structured to support where I want the business to be in 5 to 10 years, not just where it is today.',
+      'I have documented processes for accounting, operations, and key employee roles, including job descriptions for each position.',
+      'My business could operate without me for several weeks without it falling apart.',
+      'If I plan to sell or transfer the business, my books are clean and accurate enough to withstand lender or buyer scrutiny today.',
+      'There is a written emergency succession plan and key employees know where to find it.'
+    ]
+  }
+];
+
+const answers = { structure: [], processes: [], numbers: [], vision: [] };
+let currentSection = 0;
+
+function startQuiz() {
+  document.getElementById('intro').classList.add('hidden');
+  document.getElementById('quiz-body').classList.remove('hidden');
+  renderSection(0);
+}
+
+function renderSection(idx) {
+  const s = sections[idx];
+  const ans = answers[s.id];
+  const answered = ans.filter(a => a !== undefined).length;
+  const progress = Math.round(((idx / 4) + (answered / s.questions.length / 4)) * 100);
+
+  const qs = s.questions.map((q, qi) => {
+    const isYes = ans[qi] === true;
+    const isNo = ans[qi] === false;
+    const yesCls = isYes ? 'selected-yes' : '';
+    const noCls = isNo ? 'selected-no' : '';
+    const yesContent = isYes ? '&#10003; Yes' : 'Yes';
+    const noContent = isNo ? '&#10003; No' : 'No';
+    return `<div class="question-block">
+      <p class="q-num">Question ${qi + 1}</p>
+      <p class="question-text">${q}</p>
+      <div class="options">
+        <button class="opt-btn ${yesCls}" onclick="answer(${idx},${qi},true)">${yesContent}</button>
+        <button class="opt-btn ${noCls}" onclick="answer(${idx},${qi},false)">${noContent}</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  const dots = sections.map((_, i) => {
+    const cls = i < idx ? 'done' : i === idx ? 'active' : '';
+    return `<div class="dot ${cls}"></div>`;
+  }).join('');
+
+  const allAnswered = answered === s.questions.length;
+  const isLast = idx === sections.length - 1;
+  const nextLabel = isLast ? 'See my results &rarr;' : 'Next section &rarr;';
+
+  document.getElementById('quiz-body').innerHTML = `
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span class="progress-label">${s.label}</span>
+          <span class="progress-pct">${progress}% complete</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" style="width:${progress}%"></div></div>
+      </div>
+      <h2 class="section-title">${s.title}</h2>
+      <p class="section-desc">${s.desc}</p>
+      ${qs}
+      <p class="unanswered-note" id="unanswered-note">Please answer all questions before continuing.</p>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="goBack(${idx})" ${idx === 0 ? 'disabled' : ''}>&larr; Back</button>
+        <div class="step-dots">${dots}</div>
+        <button class="nav-btn primary" id="next-btn" onclick="goNext(${idx})" ${!allAnswered ? 'disabled' : ''}>${nextLabel}</button>
+      </div>
+    </div>`;
+}
+
+function answer(sIdx, qIdx, val) {
+  answers[sections[sIdx].id][qIdx] = val;
+  renderSection(sIdx);
+}
+
+function goBack(idx) {
+  if (idx > 0) { currentSection = idx - 1; renderSection(currentSection); }
+}
+
+function goNext(idx) {
+  const s = sections[idx];
+  const allAnswered = answers[s.id].filter(a => a !== undefined).length === s.questions.length;
+  if (!allAnswered) {
+    const note = document.getElementById('unanswered-note');
+    if (note) note.style.display = 'block';
+    return;
+  }
+  if (idx < sections.length - 1) { currentSection = idx + 1; renderSection(currentSection); }
+  else showResults();
+}
+
+function showResults() {
+  document.getElementById('quiz-body').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+
+  const sectionScores = sections.map(s => {
+    const ans = answers[s.id];
+    const nos = ans.filter(a => a === false).length;
+    return { title: s.title, nos, pct: Math.round(((s.questions.length - nos) / s.questions.length) * 100) };
+  });
+
+  const totalNos = sectionScores.reduce((a, b) => a + b.nos, 0);
+  const score = Math.round(((20 - totalNos) / 20) * 100);
+
+  let category, catDesc, recs;
+  if (totalNos <= 4) {
+    category = 'Strong foundation';
+    catDesc = 'Your accounting system is in solid shape. The fundamentals are mostly in place, which puts you ahead of most businesses at your revenue level. The opportunity now is optimization: tightening your reporting, making sure your dashboard reflects your actual goals, and ensuring the system you have built can support the next level of growth.';
+    recs = [
+      'Consider adding a monthly strategy review to connect your financials directly to your growth goals, not just a backward look at what happened.',
+      'Audit your chart of accounts and products and services list annually. Systems that were built well can drift over time as your business changes.',
+      'If exit planning is on the horizon, start documentation now. The businesses that sell well are the ones that started preparing early.'
+    ];
+  } else if (totalNos <= 10) {
+    category = 'Gaps worth addressing';
+    catDesc = 'Your books are functional but there are meaningful gaps in your system that are likely costing you clarity and possibly money. At your revenue level these gaps carry real risk: decisions made on incomplete information, financial credibility that may not hold up under lender or buyer scrutiny, and numbers that are harder to trust than they should be. The good news is these are fixable.';
+    recs = [
+      'Start with structure. If your chart of accounts or COGS is not set up correctly, every report built on top of it is unreliable. Fix the foundation first.',
+      'Get a written month-end close process in place with a firm deadline. Financials that take weeks to finalize are not useful for decision-making.',
+      'If you cannot name your gross margin, net profit, and overhead ratio right now, that is your most urgent priority. Those three numbers run your business.'
+    ];
+  } else {
+    category = 'Time for a reset';
+    catDesc = 'Your accounting system was built for a smaller, simpler version of your business. At your current revenue level, these gaps are not just inconvenient: they are actively making it harder to make confident decisions, harder to grow intentionally, and harder to build a business that holds its value. The path forward starts with rebuilding the foundation.';
+    recs = [
+      'A full accounting system review is the right starting point. That means chart of accounts, COGS structure, payroll mapping, and products and services list, assessed together.',
+      'If you are making decisions based on your bank account balance rather than your financials, that needs to change before anything else. Your bank balance is not a P&L.',
+      'Do not try to fix this alone or all at once. A structured cleanup with someone who understands service businesses can resolve months of compounding issues in a matter of weeks.'
+    ];
+  }
+
+  const barColors = sectionScores.map(s => s.pct >= 80 ? '#1a7a42' : s.pct >= 50 ? '#A46037' : '#A32D2D');
+  const sectionBars = sectionScores.map((s, i) => `
+    <div class="section-score-item">
+      <div class="ss-label">${s.title}</div>
+      <div class="ss-bar-wrap"><div class="ss-bar" style="width:${s.pct}%;background:${barColors[i]}"></div></div>
+      <div class="ss-val">${s.pct}% yes</div>
+    </div>`).join('');
+
+  const recCards = recs.map(r => `
+    <div class="rec-card"><span class="rec-bullet"></span><span>${r}</span></div>`).join('');
+
+  document.getElementById('results').innerHTML = `
+    <div class="score-header">
+      <p style="font-size:12px;font-weight:600;color:#A46037;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.35rem;">Your results</p>
+      <span class="score-badge">${score}%</span>
+      <p class="score-category">${category}</p>
+      <p class="score-desc">${catDesc}</p>
+    </div>
+    <div style="margin-bottom:1.25rem;">
+      <p class="section-scores-label">Score by section</p>
+      <div class="section-score-grid">${sectionBars}</div>
+    </div>
+    <div style="margin-bottom:1.25rem;">
+      <p class="rec-label">Recommended next steps</p>
+      ${recCards}
+    </div>
+    <div class="cta-card">
+      <h3>Ready to fix what this quiz uncovered?</h3>
+      <p>Book a free 30-minute discovery call. You will leave with clarity on exactly where your gaps are and what it would take to build a system that actually supports your business.</p>
+      <a class="cta-btn" href="https://calendly.com/master_plan/30min" target="_blank">Book your free discovery call</a>
+    </div>
+    <div class="restart-row">
+      <button class="restart-btn" onclick="restartQuiz()">&#8635; Start over</button>
+    </div>`;
+}
+
+function restartQuiz() {
+  sections.forEach(s => { answers[s.id] = []; });
+  currentSection = 0;
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('intro').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
